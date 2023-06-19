@@ -1,5 +1,5 @@
-import React, { useId } from 'react'
-import { ClassNumberWithMeanMedianMode, DataPoint } from '../domain/types'
+import React from 'react'
+import { ClassNumberWithMeanMedianMode } from '../domain/types'
 
 export interface IMeanMedianModeTableProps {
     data: ClassNumberWithMeanMedianMode[];

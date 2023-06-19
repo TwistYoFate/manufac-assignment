@@ -1,4 +1,3 @@
-import utils from '../utils/index';
 import { DataPoint, UnrefinedDataPoint } from "./types";
 
 // A serialiser function which ensures that all properties of the DataPoint object are of type number
