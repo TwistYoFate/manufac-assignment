@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import MeanMedianMode from './containers/MeanMedianMode';
+import { DataPoint } from './domain/types';
+import jsonData from './data/data.json';
+import { calculateGamma, refineDataPoint } from './domain';
 import './App.css';
 
 function App() {
+
+  const [dataPoints,setDataPoints] = useState<DataPoint[]>([]);
+
+  // On component mount, fetch data and add Gamma property to each data point
+  useEffect(()=>{
+    const data:DataPoint[] = refineDataPoint(jsonData);
+    data.forEach(obj=>{
+      obj["Gamma"] = calculateGamma(obj);
+    })
+    setDataPoints(data);
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <MeanMedianMode dataPoints={dataPoints} targetKey={"Flavanoids"} classKey={'Alcohol'} />
+      <MeanMedianMode dataPoints={dataPoints} targetKey={"Gamma"} classKey={'Alcohol'} />
     </div>
   );
 }
